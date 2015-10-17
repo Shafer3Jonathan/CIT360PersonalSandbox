@@ -40,7 +40,7 @@ public class myJavacollectionsframework {
         map.put(11, "Eleven");
         map.put(7, "Seven");
         map.put(6, "Six");
-        map.put(11, "Eleven");
+        map.put(11, "Twelve");
         /*output map*/
         System.out.println("Map Output");
         for(Integer key: map.keySet()) {
