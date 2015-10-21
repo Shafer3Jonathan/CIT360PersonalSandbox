@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class DownloadWebpageExample {
+public class AndroidHTTPCommunication {
   public static void main(String[] args) {
     try {
       URL url = new URL("http://www.vogella.com");
