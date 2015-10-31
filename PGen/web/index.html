@@ -1,17 +1,17 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <title>PGen</title>
-        <link rel="manifest" href="./favicon/manifest.json"/>
-        <link rel="stylesheet" type="text/css" href="css/pgen.css"/>
-        <script type="text/javascript" src="js/script.js"></script>
-    </h:head>
-    <h:body>
-      <aside class="left col">
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>PGen</title>
+    <link rel="manifest" href="./favicon/manifest.json">
+    <link rel="stylesheet" type="text/css" href="css/pgen.css">
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+    <aside class="left col">
         <header class="header row">
             Navigation
         </header>
@@ -23,8 +23,9 @@
         <footer class="footer row">
             &copy; Copyright - PGen 2015
         </footer>
-      </aside>
-      <main class="right col">
+    </aside>
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <main class="right col">
         <header class="header row">
             <span>PGen</span>
         </header>
@@ -52,20 +53,14 @@
                 </script>
             </div>
         </nav>
-          <h:form>
-            <section class="body row scroll-y">
+        <section class="body row scroll-y">
             <h2 style="text-align:center">PGen</h2>
 			<h3 style="text-align:center">The Interactive Password Generator</h3>
 			<img style="display: block; margin-left: auto; margin-right: auto" src="img/lock.png" />
-                        <p style="text-align:center">
-                            <h:commandButton action="#{employeeController.empAdd('Jon', 'Shafer III', 150000)}" value="Generate"/>
-                        </p>
-            </section>
-          </h:form>
+        </section>
         <footer class="footer row">
             CIT 360 * Fall 2015 * Created by Team Awesome
         </footer>
     </main>
-    </h:body>
+</body>
 </html>
-
