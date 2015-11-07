@@ -29,12 +29,13 @@ public class ManageEmployee {
          throw new ExceptionInInitializerError(ex); 
       }
       ManageEmployee ME = new ManageEmployee();
-
+      MyJSON MJ = new MyJSON();
+      MyCollections MC = new MyCollections();
       /* Add few employee records in database */
       Integer empID1 = ME.addEmployee("Zara", "Ali", 1000);
       Integer empID2 = ME.addEmployee("Daisy", "Das", 5000);
       Integer empID3 = ME.addEmployee("John", "Paul", 10000);
-
+      
       /* List down all the employees */
       ME.listEmployees();
 
@@ -46,6 +47,11 @@ public class ManageEmployee {
 
       /* List down new list of the employees */
       ME.listEmployees();
+      
+      /*creates a json object then stringifies it and stores it in the json table*/
+      MJ.JAdd();
+      /*Creates a collection*/
+      MC.CAdd();
    }
    /* Method to CREATE an employee in the database */
    public Integer addEmployee(String fname, String lname, int salary){
