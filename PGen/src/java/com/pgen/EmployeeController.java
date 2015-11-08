@@ -6,6 +6,7 @@
 package com.pgen;
 
 //import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -23,12 +24,13 @@ import org.hibernate.cfg.Configuration;
 //@ManagedBean
 @Named
 @RequestScoped
-public class EmployeeController {
+public class EmployeeController implements Serializable {
     /*Declare session variables for use in the Employee Controller Class
     * Calls the HibernateUtil.java class to enable this to create the following objects
     */
     private static SessionFactory factory;
     private Session session;
+    private String testdata = "sample";
     
     /*Default Constructor for the Employee Controller Class every time this class is instanciated this method is called*/
     public EmployeeController(){
@@ -41,6 +43,9 @@ public class EmployeeController {
             throw new ExceptionInInitializerError(ex); 
         }
     }
+    public String getPassword(){
+      return "Password " + testdata;
+    }
     /*This Method closes the Hibernate DB connection*/
     private void CloseConnection(){
          session.close(); 
@@ -49,6 +54,7 @@ public class EmployeeController {
     public void empAdd(String firstname, String lastname, Integer salary){
         EmployeeController EC = new EmployeeController();
         EC.addEmployee(firstname, lastname, salary);
+        testdata = "sample changed";
         CloseConnection();
     }
     /*This is how one would list the contents of the employee table of the employee database*/

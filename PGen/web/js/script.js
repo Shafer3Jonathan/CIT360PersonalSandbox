@@ -1,8 +1,8 @@
 var menu = [
-    ["Home", "./index.html", false],
-    ["History", "./history.html", false],
-    ["Exit", "./exit.html", false],
-    ["Logoff", "./logoff.html", false]
+    ["Home", "./index.xhtml", false],
+    ["History", "./history.xhtml", false],
+    ["Exit", "./exit.xhtml", false],
+    ["Logoff", "./logoff.xhtml", false]
     // ["Setup", "./setup.html", false]
 ];
 

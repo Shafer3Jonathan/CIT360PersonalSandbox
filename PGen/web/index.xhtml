@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -32,7 +33,7 @@
             <div class="toggled-menu">
                 <div class="rmm-toggled" style="display: block;">
                     <div class="rmm-toggled-controls">
-                        <div class="rmm-toggled-title">CoinTracker</div>
+                        <div class="rmm-toggled-title">PGen</div>
                         <div id="rmm-button" class="rmm-button" onclick="showMenu()">
                             <span>&nbsp;</span>
                             <span>&nbsp;</span>
@@ -58,7 +59,12 @@
 			<h3 style="text-align:center">The Interactive Password Generator</h3>
 			<img style="display: block; margin-left: auto; margin-right: auto" src="img/lock.png" />
                         <p style="text-align:center">
-                            <h:commandButton action="#{employeeController.empAdd('Jon', 'Shafer III', 150000)}" value="Generate"/>
+                            <h:commandButton id="pgenbutton" action="#{employeeController.empAdd('Jon', 'Shafer III', 150000)}" value="Generate">
+                            <f:ajax execute="pgenbutton" render="pgenoutput"/>
+                            </h:commandButton>
+                        </p>
+                        <p>
+                            <h:outputText id="pgenoutput" value="#{employeeController.password !=null ? employeeController.password : ''}"/>
                         </p>
             </section>
           </h:form>
