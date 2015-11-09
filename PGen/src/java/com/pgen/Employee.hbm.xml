@@ -13,3 +13,5 @@
     <property column="salary" name="salary" type="int"/>
   </class>
 </hibernate-mapping>
+
+
