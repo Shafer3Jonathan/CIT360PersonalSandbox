@@ -57,18 +57,28 @@
             <section class="body row scroll-y">
             <h2 style="text-align:center">PGen</h2>
 			<h3 style="text-align:center">The Interactive Password Generator</h3>
-			<img style="display: block; margin-left: auto; margin-right: auto" src="img/lock.png" />
                         <p style="text-align:center">
-                            <h:commandButton id="pgenbutton" action="#{pgencontroller.pwdAdd()}" value="Generate">
-                            <f:ajax execute="pgenbutton" render="pgenoutput"/>
-                            </h:commandButton>
-                        </p>
-                        <p>
-                            <h:outputText id="pgenoutput" value="#{pgencontroller.password !=null ? pgencontroller.password : ''}"/>
-                            
-                        </p>
-                        <p>
-                            <h:commandButton action="history" value="history" />
+                            <h:dataTable value="#{employeeController.empList()}" var="passwords"
+                                styleClass="employeeTable"
+                                headerClass="employeeTableHeader"
+                                rowClasses="employeeTableOddRow,employeeTableEvenRow">
+                                <h:column>    				
+                                    <f:facet name="header">Name</f:facet>    				
+                                    #{employee.name}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Department</f:facet>
+                                    #{employee.department}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Age</f:facet>
+                                   #{employee.age}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Salary</f:facet>
+                                    #{employee.salary}
+                                </h:column>
+                            </h:dataTable>
                         </p>
             </section>
           </h:form>

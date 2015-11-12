@@ -55,13 +55,13 @@ public class EmployeeController implements Serializable {
         EmployeeController EC = new EmployeeController();
         EC.addEmployee(firstname, lastname, salary);
         testdata = "sample changed";
-        CloseConnection();
+        //CloseConnection();
     }
     /*This is how one would list the contents of the employee table of the employee database*/
     public void empList(){
         EmployeeController EC = new EmployeeController();
         EC.listEmployees();
-        CloseConnection();
+        //CloseConnection();
     }
     /*This is how one would update a salary for someon in the employee database*/
     public void empUpd(int EmpID, int Salary){
@@ -93,23 +93,24 @@ public class EmployeeController implements Serializable {
       return employeeID;
    }
     /* Method to LIST all employees */
-    private void listEmployees( ){
+    private void listEmployees(){
       Transaction tx = null;
       try{
          tx = session.beginTransaction();
          List employees = session.createQuery("FROM Employee").list(); 
          for (Iterator iterator = 
-                           employees.iterator(); iterator.hasNext();){
-            Employee employee = (Employee) iterator.next(); 
-            System.out.print("First Name: " + employee.getFirstName()); 
-            System.out.print("  Last Name: " + employee.getLastName()); 
-            System.out.println("  Salary: " + employee.getSalary()); 
+                employees.iterator(); iterator.hasNext();){
+                Employee employee = (Employee) iterator.next(); 
+            //System.out.print("First Name: " + employee.getFirstName()); 
+            //System.out.print("  Last Name: " + employee.getLastName()); 
+            //System.out.println("  Salary: " + employee.getSalary()); 
          }
          tx.commit();
       }catch (HibernateException e) {
          if (tx!=null) tx.rollback();
          e.printStackTrace(); 
       }
+      CloseConnection();
    }
    
    /* Method to UPDATE salary for an employee */

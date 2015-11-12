@@ -57,18 +57,16 @@
             <section class="body row scroll-y">
             <h2 style="text-align:center">PGen</h2>
 			<h3 style="text-align:center">The Interactive Password Generator</h3>
-			<img style="display: block; margin-left: auto; margin-right: auto" src="img/lock.png" />
                         <p style="text-align:center">
-                            <h:commandButton id="pgenbutton" action="#{pgencontroller.pwdAdd()}" value="Generate">
-                            <f:ajax execute="pgenbutton" render="pgenoutput"/>
-                            </h:commandButton>
-                        </p>
-                        <p>
-                            <h:outputText id="pgenoutput" value="#{pgencontroller.password !=null ? pgencontroller.password : ''}"/>
-                            
-                        </p>
-                        <p>
-                            <h:commandButton action="history" value="history" />
+                            <h:dataTable value="#{PGenController.pwdList()}" var="passwords"
+                                styleClass="historyTable"
+                                headerClass="historyTableHeader"
+                                rowClasses="historyTableOddRow,historyTableEvenRow">
+                                <h:column>    				
+                                    <f:facet name="header">Name</f:facet>    				
+                                    #{history.password}
+                                </h:column>
+                            </h:dataTable>
                         </p>
             </section>
           </h:form>

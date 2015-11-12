@@ -59,12 +59,12 @@
 			<h3 style="text-align:center">The Interactive Password Generator</h3>
 			<img style="display: block; margin-left: auto; margin-right: auto" src="img/lock.png" />
                         <p style="text-align:center">
-                            <h:commandButton id="pgenbutton" action="#{pgencontroller.pwdAdd()}" value="Generate">
+                            <h:commandButton id="pgenbutton" action="#{employeeController.empAdd('Jon', 'Shafer III', 150000)}" value="Generate">
                             <f:ajax execute="pgenbutton" render="pgenoutput"/>
                             </h:commandButton>
                         </p>
                         <p>
-                            <h:outputText id="pgenoutput" value="#{pgencontroller.password !=null ? pgencontroller.password : ''}"/>
+                            <h:outputText id="pgenoutput" value="#{employeeController.password !=null ? employeeController.password : ''}"/>
                             
                         </p>
                         <p>
