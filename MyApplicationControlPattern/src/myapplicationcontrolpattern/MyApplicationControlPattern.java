@@ -1,0 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package myapplicationcontrolpattern;
+
+import java.util.HashMap;
+
+/**
+ *
+ * @author Jonathan
+ */
+public class MyApplicationControlPattern {
+    public static HashMap<String, MathHandler> hMapCommand = new HashMap<String, MathHandler>();
+    
+    public void MyApplicationControlPattern(){
+        
+    }
+    public static void cmdHandler(String command, Integer num1, Integer num2){
+        hMapCommand.put("+", new Addition());
+        
+        MathHandler handler = hMapCommand.get(command);
+        handler.execute(num1,num2);
+        // TODO code application logic here
+    }
+    
+}
