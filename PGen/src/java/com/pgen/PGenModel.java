@@ -16,7 +16,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
+import java.util.Date;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 /**
  *
  * @author Jonathan the Boss McDos of java programming
@@ -29,8 +31,8 @@ public class PGenModel implements Serializable {
     */
     private static SessionFactory factory;
     private Session session;
-    
-    
+    private String testmessage;
+    private String actualmessage;
     /*Default Constructor for the PGen Controller Class every time this class is instanciated this method is called*/
     public PGenModel(){
         //this attempts to open the Database Connection the the Password database defined in the database connector specified hibernate.cfg.xml
@@ -43,32 +45,34 @@ public class PGenModel implements Serializable {
         }
     }
     
-    public static String pwdGenerator(){
-        //Please Place your Password generating code here
-        String generatedpass = "fhqgwads";
-        return generatedpass;
-    }
     /*This Method closes the Hibernate DB connection*/
     public void CloseConnection(){
          session.close(); 
     }
+    //JUnit Test Case
+    @Test
+    public void myJUnitTester(){
+        assertEquals(testmessage,actualmessage);
+    }
     /*This is how one would add an Password to the Password table of the Password database*/
-    
-    
     /* Method to ADD an PGen */
-    public Integer addPassword(String passwd){
+    public Integer addPassword(String passwd, Date dTime){
       Transaction tx = null;
       Integer passwordID = null;
+      //prime testing variable with input data
+      testmessage = passwd;
+      System.out.println(passwd);
       try{
          tx = session.beginTransaction();
-         PGen pgen = new PGen(passwd);
+         PGen pgen = new PGen(passwd, dTime);
          passwordID = (Integer) session.save(pgen); 
          tx.commit();
       }catch (HibernateException e) {
          if (tx!=null) tx.rollback();
          e.printStackTrace(); 
       }
-      
+      //confirm data was written to database and send that to the test checking variable
+      actualmessage = listPassword(passwordID);
       return passwordID;
    }
     /* Method to LIST all Passwords */
@@ -80,9 +84,6 @@ public class PGenModel implements Serializable {
          for (Iterator iterator = 
                 Passwords.iterator(); iterator.hasNext();){
                 PGen Password = (PGen) iterator.next(); 
-            //System.out.print("First Name: " + Password.getFirstName()); 
-            //System.out.print("  Last Name: " + Password.getLastName()); 
-            //System.out.println("  Salary: " + Password.getSalary()); 
          }
          tx.commit();
       }catch (HibernateException e) {
@@ -91,7 +92,22 @@ public class PGenModel implements Serializable {
       }
       CloseConnection();
    }
-     
+   //this lists a single password based on input passwordID
+   public String listPassword(Integer pID){
+      Transaction tx = null;
+      String passTest = null;
+      try{
+         tx = session.beginTransaction();
+         PGen password = (PGen)session.get(PGen.class, pID);
+         passTest = password.getPword();
+         tx.commit();
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+      }
+      //CloseConnection();
+      return passTest;
+   }
    /* Method to DELETE an Password from the records */
    public void deletePassword(Integer PasswordID){
       Transaction tx = null;

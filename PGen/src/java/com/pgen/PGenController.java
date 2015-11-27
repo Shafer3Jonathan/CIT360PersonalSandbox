@@ -5,9 +5,12 @@
  */
 package com.pgen;
 
-import static com.pgen.PGenModel.pwdGenerator;
+import java.io.IOException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 /**
  *
@@ -17,13 +20,20 @@ import javax.inject.Named;
 @RequestScoped
 public class PGenController {
     private String testdata = "not generated yet";
-    public void pwdAdd(){
-        String sessionpass = pwdGenerator();
+    public void pwdAdd() throws IOException{
+        PasswordGenerator pGenerator = new PasswordGenerator();
+        String sessionpass = pGenerator.pwdGenerator();
         PGenModel EC = new PGenModel();
-        EC.addPassword(sessionpass);
+        DateFetch dFetch = new DateFetch();
+        EC.addPassword(sessionpass, dFetch.DateFetch());
         setPassword(sessionpass);
-
+        Result result = JUnitCore.runClasses(PGenModel.class);
+            for (Failure failure : result.getFailures()) {
+         System.out.println(failure.toString());
+      }
+      System.out.println(result.wasSuccessful());
         //testdata = sessionpass;
+      
         EC.CloseConnection();
     }
     public String getPassword(){
@@ -44,5 +54,12 @@ public class PGenController {
         PGenModel EC = new PGenModel();
         EC.deletePassword(pwdID);
         EC.CloseConnection();
+    }
+    
+    public String pwdDate () throws IOException{   
+        DateFetch DF = new DateFetch();
+        String DateString;
+        DateString = DF.DateFetch().toString();
+        return DateString;
     }
 }

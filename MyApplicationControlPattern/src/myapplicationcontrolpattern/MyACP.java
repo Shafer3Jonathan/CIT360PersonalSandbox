@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class MyACP {
   public static void main(String[] args) {
-      MyApplicationControllerPattern deligate = new MyApplicationControllerPattern();
+      MyApplicationControlPattern deligate = new MyApplicationControlPattern();
       String add ="addition";
       Integer num1= -5;
       Integer num2= 5;
