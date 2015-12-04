@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//Implementation of this interface would be the model
-package myapplicationcontrolpattern;
+package com.pgen;
+
+import java.util.Date;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
  * @author Jonathan
  */
-public interface MathHandler {
-    void execute(Integer num1, Integer num2);
+public interface cmdHandler {
+
+    String execute(String strIn, String cmdIn, Date dteIn, Integer intIn);
 }

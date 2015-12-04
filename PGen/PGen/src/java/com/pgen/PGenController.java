@@ -25,17 +25,26 @@ public class PGenController {
         String sessionpass = pGenerator.pwdGenerator();
         PGenModel EC = new PGenModel();
         DateFetch dFetch = new DateFetch();
-        int PassID;
-        PassID = EC.addPassword(sessionpass, dFetch.DateFetch());
-        setPassword(EC.listPassword(PassID));
-        Result result = JUnitCore.runClasses(PGenModel.class);
+        String PassID = null;
+        PassID = EC.cmdRunner(sessionpass, "insert", dFetch.DateFetch(), null);
+        int PasswordID = 0;
+        try {
+            PasswordID = Integer.parseInt(PassID);
+        } catch (NumberFormatException e) { 
+            System.out.println("Error Parsing PasswordID");
+        }
+        //PassID = EC.addPassword(sessionpass, dFetch.DateFetch());
+        //setPassword(sessionpass);
+        setPassword(PGenModel.cmdRunner(null, "list", null, PasswordID));
+        //setPassword(EC.
+        Result result = JUnitCore.runClasses(insertPwd.class);
             for (Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }
       System.out.println(result.wasSuccessful());
         //testdata = sessionpass;
         
-        EC.CloseConnection();
+        //EC.CloseConnection();
     }
     public String getPassword(){
       return "Your freshly generated password is: " + testdata;
@@ -45,22 +54,22 @@ public class PGenController {
         testdata = sessionpassword;
     }
     /*This is how one would list the contents of the Password table of the Password database*/
-    public void pwdList(){
+    /*public void pwdList(){
         PGenModel EC = new PGenModel();
         EC.listPasswords();
         EC.CloseConnection();
     }
     /*Use this to delete an Password from the Password table of the Password database*/
-    public void pwdDel(int pwdID) {
+    /*public void pwdDel(int pwdID) {
         PGenModel EC = new PGenModel();
         EC.deletePassword(pwdID);
         EC.CloseConnection();
-    }
-    
+    }*/
+    /*
     public String pwdDate () throws IOException{   
         DateFetch DF = new DateFetch();
         String DateString;
         DateString = DF.DateFetch().toString();
         return DateString;
-    }
+    }*/
 }

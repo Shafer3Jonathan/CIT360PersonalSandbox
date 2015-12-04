@@ -25,23 +25,22 @@ public class PGenController {
         String sessionpass = pGenerator.pwdGenerator();
         PGenModel EC = new PGenModel();
         DateFetch dFetch = new DateFetch();
-        int PassID;
-        PassID = EC.addPassword(sessionpass, dFetch.DateFetch());
-        setPassword(EC.listPassword(PassID));
+        EC.addPassword(sessionpass, dFetch.DateFetch());
+        setPassword(sessionpass);
         Result result = JUnitCore.runClasses(PGenModel.class);
             for (Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }
       System.out.println(result.wasSuccessful());
         //testdata = sessionpass;
-        
+      
         EC.CloseConnection();
     }
     public String getPassword(){
       return "Your freshly generated password is: " + testdata;
     }
     
-    public void setPassword(String sessionpassword){
+    private void setPassword(String sessionpassword){
         testdata = sessionpassword;
     }
     /*This is how one would list the contents of the Password table of the Password database*/

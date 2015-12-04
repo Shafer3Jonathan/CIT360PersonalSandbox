@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//MVC construction this would be viewed as the Controller
 package myapplicationcontrolpattern;
 
 import java.util.HashMap;
