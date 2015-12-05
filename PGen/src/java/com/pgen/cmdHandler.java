@@ -5,10 +5,15 @@
  */
 package com.pgen;
 
+import java.util.Date;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 /**
  *
  * @author Jonathan
  */
 public interface cmdHandler {
-   public void execute ();
+
+    String execute(String strIn, String cmdIn, Date dteIn, Integer intIn);
 }
