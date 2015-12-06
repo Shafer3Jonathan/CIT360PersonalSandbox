@@ -14,6 +14,8 @@ import org.junit.runner.notification.Failure;
 
 /**
  * This is what the view or the index.xhtml talks to on the java side. In other words this is the controller
+ * socket IO is read from here but relies on the Model for it to work completely please see http://www.tutorialspoint.com/jsf/jsf_ajax.htm for more information.
+ * Wikipedia states that socket io is achieved when the serialize interface is implemented see this source https://en.wikipedia.org/wiki/Serialization#Example_2
  * @author Jonathan
  */
 //allows the JSF to communicate with this using this name
