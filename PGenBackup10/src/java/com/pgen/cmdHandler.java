@@ -10,7 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 /**
- * Interface to be used by ACP 
+ *
  * @author Jonathan
  */
 public interface cmdHandler {

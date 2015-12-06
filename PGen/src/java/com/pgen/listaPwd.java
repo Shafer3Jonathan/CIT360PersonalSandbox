@@ -10,11 +10,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 
 /**
- *
+ * This code just returns a single password it is being used with the JUnit example.
  * @author Jonathan
  */
 public class listaPwd extends cmdSession implements cmdHandler{
-
+    //DB list a single password
     @Override
     public String execute(String strIn, String cmdIn, Date dteIn, Integer intIn) {
          Transaction tx = null;
@@ -28,7 +28,9 @@ public class listaPwd extends cmdSession implements cmdHandler{
          if (tx!=null) tx.rollback();
          e.printStackTrace(); 
       }
+      //close the db connection
       CloseConnection();
+    //return the retrieved password 
     return passTest; 
     }
    

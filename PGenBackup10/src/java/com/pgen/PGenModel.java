@@ -16,8 +16,8 @@ import java.util.HashMap;
 //@ManagedBean
 
 public class PGenModel implements Serializable {
-    /* This uses ACP to allow the model to talk to the database follow referenced functions for more details
-    * This also contains an example of the Java Collections Framework a hashmap
+    /*Declare session variables for use in the PGen Controller Class
+    * Calls the HibernateUtil.java class to enable this to create the following objects
     */
     public static HashMap<String, cmdHandler> hMapCommand = new HashMap<String, cmdHandler>();
     private static String PassInfo;

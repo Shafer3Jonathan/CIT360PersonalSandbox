@@ -13,63 +13,60 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 /**
- *
+ * This is what the view or the index.xhtml talks to on the java side. In other words this is the controller
  * @author Jonathan
  */
+//allows the JSF to communicate with this using this name
 @Named(value="pgencontroller")
 @RequestScoped
+//declare the class
 public class PGenController {
+    //declare variables 
+    
+    //this one is used to display a temporary value on the main screen
     private String testdata = "not generated yet";
-    public void pwdAdd() throws IOException{
-        PasswordGenerator pGenerator = new PasswordGenerator();
-        String sessionpass = pGenerator.pwdGenerator();
-        PGenModel EC = new PGenModel();
-        DateFetch dFetch = new DateFetch();
+    //Password adding function which uses multiple technologies
+    public void pwdAdd() throws IOException, InterruptedException{
+        //declare variables
         String PassID = null;
-        PassID = EC.cmdRunner(sessionpass, "insert", dFetch.DateFetch(), null);
         int PasswordID = 0;
+        //instanciate classes to be used for multithreading and other purposes
+        PGenModel EC = new PGenModel();
+        PGenerator pg = new PGenerator();
+        DGenerator dg = new DGenerator();
+        //setup the threads
+        Thread passgen = new Thread(pg, "passgen");
+        Thread dategen = new Thread(dg, "dategen");
+        //start the threads and wait for them to finish these do two things generate a password and get a date time stamp
+        //FYI the date timestamp is a HTTP URL Connection
+        passgen.start();
+        dategen.start();
+        passgen.join();
+        dategen.join();
+        
+        //assign variable data in this case this one gets the primary key (index) value for the value that was just inserted
+        PassID = EC.cmdRunner(pg.getaPass(), "insert", dg.getDatetime(), null);
+        //this attempts to do a parseInt if not it catches the error. I felt this was ok to use in this case as the primary key will always be a number
         try {
             PasswordID = Integer.parseInt(PassID);
         } catch (NumberFormatException e) { 
             System.out.println("Error Parsing PasswordID");
         }
-        //PassID = EC.addPassword(sessionpass, dFetch.DateFetch());
-        //setPassword(sessionpass);
+        //this sets the generated password to the variable being used by Socket IO on the front side.
         setPassword(PGenModel.cmdRunner(null, "list", null, PasswordID));
-        //setPassword(EC.
+        //JUnit Testing
         Result result = JUnitCore.runClasses(insertPwd.class);
             for (Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }
       System.out.println(result.wasSuccessful());
-        //testdata = sessionpass;
-        
-        //EC.CloseConnection();
     }
+    //this is what the socket IO connection checks to see if the value changes
     public String getPassword(){
       return "Your freshly generated password is: " + testdata;
     }
-    
+    //setter for the testdata variable
     public void setPassword(String sessionpassword){
         testdata = sessionpassword;
     }
-    /*This is how one would list the contents of the Password table of the Password database*/
-    /*public void pwdList(){
-        PGenModel EC = new PGenModel();
-        EC.listPasswords();
-        EC.CloseConnection();
-    }
-    /*Use this to delete an Password from the Password table of the Password database*/
-    /*public void pwdDel(int pwdID) {
-        PGenModel EC = new PGenModel();
-        EC.deletePassword(pwdID);
-        EC.CloseConnection();
-    }*/
-    /*
-    public String pwdDate () throws IOException{   
-        DateFetch DF = new DateFetch();
-        String DateString;
-        DateString = DF.DateFetch().toString();
-        return DateString;
-    }*/
 }

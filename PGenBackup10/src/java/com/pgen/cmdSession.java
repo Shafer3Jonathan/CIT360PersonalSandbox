@@ -10,19 +10,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * So this is an interesting class. I yet again proved one thing. As another teacher stated that programmers are lazy.
- * So I relied on concepts I have learned in previous java classes and set this class up with one purpose to have it be able to be inheritable. 
- * this contains the so called priming code for hibernate which is needed by all of the interaction classes like insert, delete, list, list all.
+ *
  * @author Jonathan
  */
 public class cmdSession {
-    //Declare Variables
     private static SessionFactory factory;
     private Session session;
     private String testmessage;
     private String actualmessage;
     private String passtest;
-    //Build a hibernate session
     cmdSession (){
         try{
             factory = new Configuration().configure().buildSessionFactory();
@@ -32,12 +28,9 @@ public class cmdSession {
             throw new ExceptionInInitializerError(ex); 
         }
     }
-    //Session Closer
     public void CloseConnection(){
          session.close(); 
     }
-    //Getters and setters section
-    
     public static SessionFactory getFactory() {
         return factory;
     }

@@ -16,12 +16,10 @@ import org.junit.Test;
  * @author Jonathan
  */
 public class insertPwd extends cmdSession implements cmdHandler{
-    //JUnit Testing code
     @Test
     public void myJUnitTester(){
         assertEquals(getTestmessage(),getActualmessage());
     }
-    //DB insert hibernate code
     @Override
     public String execute(String strIn, String cmdIn, Date dteIn, Integer intIn) {
       Transaction tx = null;
@@ -38,9 +36,9 @@ public class insertPwd extends cmdSession implements cmdHandler{
          if (tx!=null) tx.rollback();
          e.printStackTrace(); 
       }
-      //close the connection
+      //confirm data was written to database and send that to the test checking variable
+      //actualmessage = listPassword(passwordID);
       CloseConnection();
-      //returns a string value of the index that will later be converted back to an int
       return passwordID.toString();
     }
 
