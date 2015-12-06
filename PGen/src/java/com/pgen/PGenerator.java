@@ -18,10 +18,9 @@ public class PGenerator implements Runnable{
     //Threading implementation
     @Override
     public void run() {
-        //aPass = "fhqgwads";
         this.PasswordIOGet();
     }
-    
+    //SocketIO implementation reaches out to server to get a password
     private void PasswordIOGet(){
       String serverName = "127.0.0.1";
       int port = Integer.parseInt("6066");
