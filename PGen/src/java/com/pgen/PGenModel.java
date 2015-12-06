@@ -10,17 +10,17 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 /**
- *
- * @author Jonathan the Boss McDos of java programming
+ * This uses ACP to allow the model to talk to the database follow referenced functions for more details
+ * This also contains an example of the Java Collections Framework a hashmap
+ * this also needs to be serializable so that the Front side can do the Socket IO connections there is a further explaination on the internet for JSF and JSP.
+ * this is needed for this to work
+ * @author Jonathan
  */
-//@ManagedBean
-
 public class PGenModel implements Serializable {
-    /* This uses ACP to allow the model to talk to the database follow referenced functions for more details
-    * This also contains an example of the Java Collections Framework a hashmap
-    */
+    //declare session variables
     public static HashMap<String, cmdHandler> hMapCommand = new HashMap<String, cmdHandler>();
     private static String PassInfo;
+    //setup ACP command runner code
     public static String cmdRunner(String strIn, String cmdIn, Date dteIn, Integer intIn){
         hMapCommand.put("insert", new insertPwd());
         hMapCommand.put("delete", new deletePwd());
