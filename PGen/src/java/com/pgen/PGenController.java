@@ -34,7 +34,10 @@ public class PGenController {
         String PassID = null;
         int PasswordID = 0;
         //instanciate classes to be used for multithreading and other purposes
+        //Function Classes
         PGenModel EC = new PGenModel();
+        PGenIntParser ip = new PGenIntParser();
+        //Thread Classes
         PGenerator pg = new PGenerator();
         DGenerator dg = new DGenerator();
         //setup the threads
@@ -49,15 +52,11 @@ public class PGenController {
         //assign variable data in this case this one gets the primary key (index) value for the value that was just inserted
         PassID = EC.cmdRunner(pg.getaPass(), "insert", dg.getDatetime(), null);
         //this attempts to do a parseInt if not it catches the error. I felt this was ok to use in this case as the primary key will always be a number
-        try {
-            PasswordID = Integer.parseInt(PassID);
-        } catch (NumberFormatException e) { 
-            System.out.println("Error Parsing PasswordID");
-        }
+        PasswordID = ip.PGenIntParser(PassID);
         //this sets the generated password to the variable being used by Socket IO on the front side.
         setPassword(PGenModel.cmdRunner(null, "list", null, PasswordID));
         //JUnit Testing
-        Result result = JUnitCore.runClasses(insertPwd.class);
+        Result result = JUnitCore.runClasses(insertPwd.class, PGenIntParser.class, DGenerator.class);
             for (Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }

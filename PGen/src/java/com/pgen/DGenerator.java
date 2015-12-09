@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.junit.Assert.assertNotNull;
+import org.junit.Test;
 /**
  * This function generates a date and timestamp for the generated passwords
  * @author Jonathan
@@ -18,6 +20,11 @@ import java.util.logging.Logger;
 public class DGenerator implements Runnable {
     //Declare session variables
     private Date datetime;
+    private static String successval = null;
+    @Test
+    public void myJUnitTester(){
+        assertNotNull(successval);
+    }
     //what the multithreading function will utilize
     @Override
     public void run() {
@@ -38,6 +45,7 @@ public class DGenerator implements Runnable {
             datetime = null;
             System.out.println("No date information.");
         } else {
+            successval = "Success";
             datetime = new Date(date);
             System.out.println("Date: " + datetime);
         }
